@@ -78,7 +78,6 @@ this task. The outer loop iterates over the well production (length < variation)
 The inner loop iterates over the variation numbers and adds/subtracts these #s from the production.
 The resulting 'data_per_month' should be mostly the same as the production. (If given low probability of change)
 """
-count = 0
 data_per_month = []  # to be populated with monthly data based on production
 for i in well_production:  # naming the wells
     # well_names.append(name + str(i))  # converting to strings for naming
@@ -101,7 +100,6 @@ for i in well_production:  # naming the wells
                     data_per_month.append(i - ii)  # of no negative #, then add the data
                 # What to do about 0 values? For now we'll just let them be and say that is a day when the well did
                 # not produce enough barrels or the well was down.
-    count += 1
 """
 Separate the list onto sub-sections. Each section will be will be = the number of wells times the
 number of days in the chosen month. ( # wells x # days in month) in matrix form. 
@@ -123,9 +121,15 @@ sum_production = []  # array will contain added production for each well.
 for i4 in range(0, number_of_wells):  # Number of wells == # of rows in np array.
     sum_production.append(np.sum(re_shape[[i4], :]))
 # Getting the names for each printed wells
-print(count)
-print(well_names)
-# Printing the total added production for each well at the end of the period (
+number_to_plot = 6  # how many do I want to show in the bar graph
+names_bar_graph = []
+for i5 in range(0, number_of_wells):
+    names_bar_graph.append(well_names[i5])
+"""
+Below is printing the total added production for each well at the end of the period (month_days).
+This could be used as a visualization of how each well is doing in terms of production at the end of a time period.
+"""
+# plt.bar(names_bar_graph, sum_production)
 
 
 """
@@ -138,18 +142,19 @@ Helping to visualize the random variation that will affect the production.
 Below is an example of how to plot production of an individual well. 
 """
 # This is how to print the first 6
-plt.subplot(3, 2, 1)
-plt.plot(np.asarray(re_shape_rotate[:, [0]]))
-plt.subplot(3, 2, 2)
-plt.plot(np.asarray(re_shape_rotate[:, [1]]))
-plt.subplot(3, 2, 3)
-plt.plot(np.asarray(re_shape_rotate[:, [2]]))
-plt.subplot(3, 2, 4)
-plt.plot(np.asarray(re_shape_rotate[:, [3]]))
-plt.subplot(3, 2, 5)
-plt.plot(np.asarray(re_shape_rotate[:, [4]]))
-plt.subplot(3, 2, 6)
-plt.plot(np.asarray(re_shape_rotate[:, [5]]))
+# plt.subplot(3, 2, 1)
+# plt.plot(np.asarray(re_shape_rotate[:, [0]]))
+# plt.subplot(3, 2, 2)
+# plt.plot(np.asarray(re_shape_rotate[:, [1]]))
+# plt.subplot(3, 2, 3)
+# plt.plot(np.asarray(re_shape_rotate[:, [2]]))
+# plt.subplot(3, 2, 4)
+# plt.plot(np.asarray(re_shape_rotate[:, [3]]))
+# plt.subplot(3, 2, 5)
+# plt.plot(np.asarray(re_shape_rotate[:, [4]]))
+# plt.subplot(3, 2, 6)
+# plt.plot(np.asarray(re_shape_rotate[:, [5]]))
+
 # Show figure
 plt.show()
 
