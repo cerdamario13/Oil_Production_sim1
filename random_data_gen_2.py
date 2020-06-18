@@ -28,7 +28,7 @@ low_boundary_random = 1  # boundary values for the probability (how often) the p
 high_boundary_random = 10  # The higher the number the less it changes.
 year = 2020  # Year
 month = 1  # Number of month (ex: 1 = January)
-month_days = 100  # Can be sued to generate more days
+month_days = 100  # Can be used to generate more days
 ##########################################################################################
 
 days_in_month = []  # Empty arrays
@@ -65,9 +65,11 @@ for i2 in range(low_production_boundary, high_production_boundary):
 Creating random production for the wells. This will be a 'master' key for creating the
 production for the wells. Can be used for small and large producers.
 """
+well_names = []
 well_production = []
-for i3 in range(0, number_of_wells):
+for i3 in range(1, number_of_wells + 1):
     well_production.append(random.choice(range_of_values))
+    well_names.append(name + str(i3))  # converting to strings for naming
 
 """
 Combining all of the lists into loops that will take the 'well_production' numbers and add/subtract based on the
@@ -76,10 +78,9 @@ this task. The outer loop iterates over the well production (length < variation)
 The inner loop iterates over the variation numbers and adds/subtracts these #s from the production.
 The resulting 'data_per_month' should be mostly the same as the production. (If given low probability of change)
 """
-well_names = []
 data_per_month = []  # to be populated with monthly data based on production
 for i in well_production:  # naming the wells
-    well_names.append(name + str(i))  # converting to strings for naming
+    # well_names.append(name + str(i))  # converting to strings for naming
     # Month variations that will be based on the well_production (Inside the loop)
     for ii in random_variation:
         event_will_occur = random.choice(one_in_what_probability)  # inside the loop since we need a new
@@ -119,6 +120,17 @@ re_shape_rotate = np.rot90(re_shape)  # Had to rotate it to plot it!
 sum_production = []  # array will contain added production for each well.
 for i4 in range(0, number_of_wells):  # Number of wells == # of rows in np array.
     sum_production.append(np.sum(re_shape[[i4], :]))
+# Getting the names for each printed wells
+number_to_plot = 6  # how many do I want to show in the bar graph
+names_bar_graph = []
+for i5 in range(0, number_of_wells):
+    names_bar_graph.append(well_names[i5])
+"""
+Below is printing the total added production for each well at the end of the period (month_days).
+This could be used as a visualization of how each well is doing in terms of production at the end of a time period.
+"""
+# plt.bar(names_bar_graph, sum_production)
+
 
 """
 Helping to visualize the random variation that will affect the production.
@@ -127,7 +139,7 @@ Helping to visualize the random variation that will affect the production.
 # plt.plot(random_variation_np)
 
 """
-Below is an example of how to plot production.
+Below is an example of how to plot production of an individual well. 
 """
 # This is how to print the first 6
 # plt.subplot(3, 2, 1)
@@ -142,6 +154,7 @@ Below is an example of how to plot production.
 # plt.plot(np.asarray(re_shape_rotate[:, [4]]))
 # plt.subplot(3, 2, 6)
 # plt.plot(np.asarray(re_shape_rotate[:, [5]]))
+
 # Show figure
 plt.show()
 
@@ -150,3 +163,12 @@ Calculate Standard deviation for each well
 Calc variance 
 Show graphs of statistical analysis
 """
+
+"""
+Calculating the population standard deviation for each well. 
+
+"""
+
+
+
+
